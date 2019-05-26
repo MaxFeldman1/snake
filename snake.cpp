@@ -14,10 +14,10 @@
 #include <stropts.h>
 
 
-constexpr char up = 'w';
-constexpr char left = 'a';
-constexpr char down = 's';
-constexpr char right = 'd';
+constexpr char _up = 'w';
+constexpr char _left = 'a';
+constexpr char _down = 's';
+constexpr char _right = 'd';
 
 constexpr int width = 25;
 constexpr int height = 15;
@@ -74,7 +74,7 @@ void play_game(){
 		grid[x][y] = 1;
 		if (overlaps_snake(fx, fy))
 			grid[fx][fy] = 3;
-		else 
+		else
 			grid[fx][fy] = 2;
 		display_grid();
 
@@ -85,34 +85,34 @@ void play_game(){
 			switch(c){
 				case'w':
 				case 'W':
-					if (dir != down)
-						dir = up;
+					if (dir != _down)
+						dir = _up;
 					break;
 				case 'a':
 				case 'A':
-					if (dir != right)
-						dir = left;
+					if (dir != _right)
+						dir = _left;
 					break;
 				case 's':
 				case 'S':
-					if (dir != up)
-						dir = down;
+					if (dir != _up)
+						dir = _down;
 					break;
 				case 'd':
 				case 'D':
-					if (dir != left)
-						dir = right;
+					if (dir != _left)
+						dir = _right;
 					break;
 			}
 		}
 		//move in the appropriate direction depending on the input
-		if (dir == up)
+		if (dir == _up)
 			++y;
-		else if (dir == left)
+		else if (dir == _left)
 			--x;
-		else if (dir == down)
+		else if (dir == _down)
 			--y;
-		else	//dir == right
+		else	//dir == _right
 			++x;
 		//if we move off the screen wrap us around to other side
 		if (x < 0)
@@ -207,7 +207,6 @@ bool overlaps_snake(int x, int y, int start) {
 //this function helps us see if the keyboard has been pressed
 int _kbhit(){
 	constexpr int STDIN = 1;
-	
 	termios term;
 	tcgetattr(STDIN, &term);
 	term.c_lflag &= ~ICANON;
